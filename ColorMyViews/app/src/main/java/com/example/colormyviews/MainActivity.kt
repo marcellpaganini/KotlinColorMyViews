@@ -6,11 +6,22 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.example.colormyviews.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private val instructions : Instructions = Instructions("How to play: ", "Tap the views and buttons.")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.instructions = instructions
+
+        binding.labelText.text = instructions.label
+        binding.infoText.text = instructions.text
 
         setListeners()
     }
@@ -31,17 +42,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
 
-        val boxOneText = findViewById<TextView>(R.id.box_one_text)
-        val boxTwoText = findViewById<TextView>(R.id.box_two_text)
-        val boxThreeText = findViewById<TextView>(R.id.box_three_text)
-        val boxFourText = findViewById<TextView>(R.id.box_four_text)
-        val boxFiveText = findViewById<TextView>(R.id.box_five_text)
+        val boxOneText = binding.boxOneText
+        val boxTwoText = binding.boxTwoText
+        val boxThreeText = binding.boxThreeText
+        val boxFourText = binding.boxFourText
+        val boxFiveText = binding.boxFiveText
 
-        val redButton = findViewById<Button>(R.id.red_button)
-        val greenButton = findViewById<Button>(R.id.green_button)
-        val yellowButton = findViewById<Button>(R.id.yellow_button)
+        val redButton = binding.redButton
+        val greenButton = binding.greenButton
+        val yellowButton = binding.yellowButton
 
-        val rootConstraintLayout = findViewById<View>(R.id.constraint_layout)
+        val rootConstraintLayout = binding.constraintLayout
 
         val clickableViews: List<View> =
             listOf(boxOneText, boxTwoText, boxThreeText,
